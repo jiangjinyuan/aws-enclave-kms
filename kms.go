@@ -11,6 +11,7 @@ import (
 	"github.com/brodyxchen/aws-enclave-kms/models"
 	"github.com/brodyxchen/aws-enclave-kms/network"
 	"github.com/brodyxchen/aws-enclave-kms/nitro"
+	_ "github.com/brodyxchen/aws-enclave-kms/randseed"
 	"github.com/brodyxchen/aws-enclave-kms/types"
 	"github.com/brodyxchen/aws-enclave-kms/viproxy"
 	"github.com/mdlayher/vsock"
