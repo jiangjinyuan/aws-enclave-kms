@@ -38,12 +38,12 @@ const (
 	ReleaseEnv = env.ReleaseEnv
 )
 
-func NewClient(inEnv env.Env, inPort, outPort int) (*Client, error) {
-	env.Set(inEnv)
+func NewClient() (*Client, error) {
+	// env.Set(inEnv)
 
 	cli := &Client{
-		inTcpPort: inPort,
-		outVPort:  outPort,
+		// inTcpPort: inPort,
+		// outVPort:  outPort,
 	}
 
 	err := cli.init()
@@ -56,7 +56,8 @@ func NewClient(inEnv env.Env, inPort, outPort int) (*Client, error) {
 }
 
 type Client struct {
-	region string
+	region   string
+	endpoint string
 
 	credential *aws.Credentials
 
@@ -83,13 +84,13 @@ func (cli *Client) init() error {
 	httpCli, _ := cli.withHttpProxy()
 	cli.httpCli = httpCli
 
-	if err := cli.initLoopback(); err != nil {
+	/*if err := cli.initLoopback(); err != nil {
 		return err
-	}
+	}*/
 
-	if err := cli.initProxy(); err != nil {
+	/*if err := cli.initProxy(); err != nil {
 		return err
-	}
+	}*/
 
 	priKey, pubKey, err := crypto.GenerateRsaKey(2048)
 	if err != nil {
@@ -130,8 +131,13 @@ func (cli *Client) initProxy() error {
 func (cli *Client) SetRegion(region string) {
 	cli.region = region
 }
+
 func (cli *Client) SetCredential(credential *aws.Credentials) {
 	cli.credential = credential
+}
+
+func (cli *Client) SetEndPoint(endpoint string) {
+	cli.endpoint = endpoint
 }
 
 func (cli *Client) GenerateRandom(byteCount int) ([]byte, error) {

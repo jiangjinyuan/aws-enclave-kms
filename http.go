@@ -22,7 +22,8 @@ var (
 
 func (cli *Client) callKms(target string, reqPtr interface{}, rspPtr interface{}) error {
 	log.Info("kms.callKms target : ", target)
-	url := fmt.Sprintf("https://kms.%s.amazonaws.com/", cli.region)
+	// url := fmt.Sprintf("https://kms.%s.amazonaws.com/", cli.region)
+	url := cli.endpoint
 
 	reqData, err := json.Marshal(reqPtr)
 	if err != nil {
