@@ -30,10 +30,11 @@ type GenerateRandomResponse struct {
 }
 
 type GenerateDataKeyRequest struct {
-	KeyId       string
-	GrantTokens []string
-	KeySpec     types.DataKeySpec
-	Recipient   *RecipientInfo `json:"Recipient,omitempty"`
+	KeyId         string
+	GrantTokens   []string
+	NumberOfBytes int `json:"NumberOfBytes"`
+	KeySpec       types.DataKeySpec
+	Recipient     *RecipientInfo `json:"Recipient,omitempty"`
 }
 type GenerateDataKeyResponse struct {
 	CiphertextBlob string

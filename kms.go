@@ -174,7 +174,7 @@ func (cli *Client) GenerateRandom(byteCount int) ([]byte, error) {
 	return plainBytes, nil
 }
 
-func (cli *Client) GenerateDataKey(keySpec types.DataKeySpec, kmsKeyId string) ([]byte, []byte, error) {
+func (cli *Client) GenerateDataKey(byteCount int, kmsKeyId string) ([]byte, []byte, error) {
 	awsTarget := "TrentService.GenerateDataKey"
 
 	recipient, err := cli.withRecipientInfo()
@@ -184,7 +184,8 @@ func (cli *Client) GenerateDataKey(keySpec types.DataKeySpec, kmsKeyId string) (
 	req := &models.GenerateDataKeyRequest{
 		KeyId: kmsKeyId,
 		//GrantTokens: []string{cli.sessionToken},
-		KeySpec:   keySpec,
+		NumberOfBytes: byteCount,
+		// KeySpec:   keySpec,
 		Recipient: recipient,
 	}
 	if len(cli.credential.SessionToken) > 0 {
