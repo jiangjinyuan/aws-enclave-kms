@@ -97,7 +97,7 @@ func (cli *Client) withHeaders(target string, reqData []byte) map[string]string 
 	unsignedString := signBuilder.String()
 
 	// 计算签名
-	sign := cli.signatureKms(dateStamp, cli.region, awsService, unsignedString)
+	sign := cli.signatureKms(amzDateTime, cli.region, awsService, unsignedString)
 
 	// header-Authorization: algorithm Credential=access key ID/credential scope, SignedHeaders=SignedHeaders, Signature=signature
 	var authBuilder strings.Builder
